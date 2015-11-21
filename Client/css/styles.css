@@ -42,6 +42,7 @@ html,body{height:100%;
 
 .profil-img {
   border:none;
+  margin-bottom: 15%;
 }
 
 .card {
@@ -49,7 +50,7 @@ html,body{height:100%;
 }
 
 .custom-label {
-    margin: 1%;
+    margin: 2%;
     display: inline-flex;
     padding: 0.7em 1.6em 0.7em;
     font-size: 75%;
@@ -83,7 +84,11 @@ html,body{height:100%;
   background-color: #eb6759;
   border-radius: 45px;
   border:none;
+}
+
+.button-section {
   margin-top: 5%;
+
 }
 
 
