@@ -96,7 +96,7 @@ var users = [
           answer6:2,
           answer7:3}
     ];
-
+var notes = [];
 
 app.get('/:username', function(req, res) {
 	var username = req.params.username;
@@ -137,6 +137,27 @@ app.get('/:username/:matchedUsername', function(req, res) {
   }else{
     console.log("Resquest to: " + username + "/" + matchedUsername);
     res.json(constructMatchingInfos(foundUser, matchedFoundUser));
+  }
+});
+
+app.post('/:username/:matchedUsername', function(req, res){
+  var username = req.params.username;
+  var foundUser = userFromUsers(username);
+  var matchedUsername = req.params.matchedUsername;
+  var matchedFoundUser = userFromUsers(matchedUsername);
+  if(!foundUser || !matchedFoundUser){
+    return res.status(403).send({ 
+           success: false, 
+           message: 'Aucun utilisateur à ce nom.' });
+  }else{
+    var nouvelleNote = req.body.text;
+    if(nouvelleNote){
+        console.log("ajout d'une note: " + username + "/" + matchedUsername);
+    }else{
+        return res.status(403).send({ 
+         success: false, 
+         message: 'Aucune note trouvée, utilise body.text!' });
+    }
   }
 });
 
@@ -225,7 +246,8 @@ var constructMatchingInfos = function(loggedUser, matchedUser){
     anwser4loggedUser: questions[3].answers[loggedUser.answer4-1],
     anwser5loggedUser: questions[4].answers[loggedUser.answer5-1],
     anwser6loggedUser: questions[5].answers[loggedUser.answer6-1],
-    anwser7loggedUser: questions[6].answers[loggedUser.answer7-1]
+    anwser7loggedUser: questions[6].answers[loggedUser.answer7-1]//,
+    //notes: notes[loggedUser.username][matchedUser.username]
   }
   return retour;
 }
