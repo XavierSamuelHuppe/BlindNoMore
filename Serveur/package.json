@@ -1,0 +1,10 @@
+{
+  "name": "BlindNoMore",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "~1.14.1",
+    "express": "~4.13.3",
+    "jsonwebtoken": "~5.4.1",
+    "uuid": "~2.0.1"
+  }
+}
