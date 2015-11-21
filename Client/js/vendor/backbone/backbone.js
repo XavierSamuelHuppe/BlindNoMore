@@ -1407,7 +1407,7 @@
       if (error) error.call(options.context, xhr, textStatus, errorThrown);
     };
 
-    // Make the request, allowing the profil to override any Ajax options.
+    // Make the request, allowing the profile to override any Ajax options.
     var xhr = options.xhr = Backbone.ajax(_.extend(params, options));
     model.trigger('request', model, xhr, options);
     return xhr;
@@ -1663,7 +1663,7 @@
       }
 
       // Proxy an iframe to handle location events if the browser doesn't
-      // support the `hashchange` event, HTML5 history, or the profil wants
+      // support the `hashchange` event, HTML5 history, or the profile wants
       // `hashChange` but not `pushState`.
       if (!this._hasHashChange && this._wantsHashChange && !this._usePushState) {
         this.iframe = document.createElement('iframe');
@@ -1733,7 +1733,7 @@
     checkUrl: function(e) {
       var current = this.getFragment();
 
-      // If the profil pressed the back button, the iframe's hash will have
+      // If the profile pressed the back button, the iframe's hash will have
       // changed and we should use that for comparison.
       if (current === this.fragment && this.iframe) {
         current = this.getHash(this.iframe.contentWindow);

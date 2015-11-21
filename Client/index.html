@@ -9,11 +9,11 @@
     <meta name="author" content="">
 
     <link href="js/vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
 </head>
-<body>
+<body class="app-section">
 
 <div id="page">
-    Loading...
 </div>
 
 
@@ -22,6 +22,12 @@
 </footer>
 
 <script data-main="js/main" src="js/vendor/requirejs/require.js"></script>
+<script>
+    $(document.ready(function() {
+        var loginView = new LoginView();
+        loginView.render();
+    }))
+</script>
 
 </body>
 </html>

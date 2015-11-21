@@ -2,42 +2,30 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'views/home/HomeView'
-], function($, _, Backbone, HomeView) {
+    'views/login/LoginView',
+    'views/profile/ProfileView',
+    'models/profile/ProfileModel'
+], function($, _, Backbone, LoginView, ProfileView, ProfileModel) {
 
-    var AppRouter = Backbone.Router.extend({
+    var Router = Backbone.Router.extend({
         routes: {
-            '/login': 'loginPage',
-            // Default
-            '*actions': 'defaultAction'
+            "": "showLogin",
+            "edit": "showLogin",
         }
     });
+    var router = new Router;
+    router.on('route:showLogin', function (actions) {
+        var loginView = new LoginView();
+        console.log("AHSIDAAAAAAAAAAAA");
+        loginView.render();
+    });
 
-    var initialize = function(){
-
-        Backbone.View.prototype.destroyView = function() {
-            this.undelegateEvents();
-            this.$el.empty();
-            delete this;
-        };
-
-        var viewCleanup = function (lastView) {
-            if(lastView) {
-                lastView.destroyView();
-            }
-        };
-
-        var app_router = new AppRouter;
-
-        app_router.on('route:defaultAction', function (actions) {
-            var homeView = new HomeView();
-            homeView.render();
-        });
-
-
-        Backbone.history.start();
-    };
-    return {
-        initialize: initialize
-    };
+    router.on('route:showProfile', function(profileName){
+        console.log("NIGGA");
+        var profile = new ProfileModel({profileName: profileName});
+        console.log("1231231231232133");
+        var profileView = new ProfileView(profile);
+        profileView.render();
+    });
+    Backbone.history.start();
 });

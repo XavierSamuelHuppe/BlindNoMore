@@ -2,10 +2,9 @@ define([
     'underscore',
     'backbone'
 ], function (_, Backbone) {
+    var ProfileModel = Backbone.Model.extend({
 
-    var UserModel = Backbone.Model.extend({
-
-        urlRoot: 'http://localhost:8080/users',
+        urlRoot: 'http://localhost:8082/bob',
 
         parse: function (data) {
             var result;
@@ -14,13 +13,11 @@ define([
             } else {
                 return {};
             }
-
-            result['id'] = result.userId;
-            result['name'] = result.userName;
+            console.log(result);
+            result['name'] = result.profileName;
             return result;
-        },
-
+        }
     });
 
-    return UserModel;
+    return ProfileModel;
 });
