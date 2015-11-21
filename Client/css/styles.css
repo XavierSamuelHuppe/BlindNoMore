@@ -17,7 +17,7 @@ html,body{height:100%;
     max-width:40%;
     min-width:40%;
     display: inline-flex;
-        margin-bottom: 3px;
+    margin-bottom: 3px;
 }
 .customheight {
 	border-radius:0px;
@@ -28,7 +28,6 @@ html,body{height:100%;
   margin-top: 30%;
 }
 .lower-section {
-  padding-top: 110%;
 }
 
 
@@ -94,8 +93,14 @@ html,body{height:100%;
 
 }
 .background-img {
-  position:absolute;
+    position: absolute;
+    
 }
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+ }
 
 
 @font-face {
