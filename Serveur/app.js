@@ -12,7 +12,7 @@ app.get('/', function (req, res) {
 	res.send('Hello World!');
 });
 
-var questions = [
+var questionslist = [
       {"question": "Quel animal aimez-vous le plus?",
        "answer1": "chat",
    	   "answer2": "chien",
@@ -49,11 +49,8 @@ app.post('/login', function(req, res) {
     emails.push({email:newEmail,
     			 token:jwtToken});
     console.log(emails);
-    res.json({token:jwtToken});
+    res.json({token:jwtToken, questions: questionslist});
 });
-
-
-
 
 
 

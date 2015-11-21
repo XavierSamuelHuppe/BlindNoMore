@@ -7,6 +7,7 @@ define([
 
     var AppRouter = Backbone.Router.extend({
         routes: {
+            '/login': 'loginPage',
             // Default
             '*actions': 'defaultAction'
         }

@@ -11,7 +11,6 @@ define([
         render: function(){
             this.$el.html(homeTemplate);
         }
-
     });
 
     return HomeView;
