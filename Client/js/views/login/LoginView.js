@@ -9,9 +9,11 @@ define([
         el: $("#page"),
 
         render: function() {
-            this.$el.html(loginTemplate);
+            console.log("has been rendered");
+            var that = this;
+            var template = _.template(loginTemplate, {});
+            that.$el.html(template);
         }
     });
-
     return LoginView;
 });

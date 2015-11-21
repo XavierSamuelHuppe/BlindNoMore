@@ -4,7 +4,7 @@ define([
 ], function (_, Backbone) {
     var ProfileModel = Backbone.Model.extend({
 
-        urlRoot: 'http://localhost:8082/bob',
+            urlRoot: 'http://localhost:8082/',
 
         parse: function (data) {
             var result;

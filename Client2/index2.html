@@ -36,6 +36,7 @@
             <td><%= htmlEncode(user.get('age')) %></td>
             <td><a class="btn" href="#/edit/<%= user.id %>">Edit</a></td>
             <td><a class="btn" href="#/hello">Hello</a></td>
+            <td><a class="btn" href="#/profile">Hello2</a></td>
         </tr>
         <% }); %>
         </tbody>
@@ -60,6 +61,13 @@
     </form>
 </script>
 
+<script type="text/template" id="profile-template">
+    <div>HELLO</div>
+    <div><%= profile ? 'Update' : 'Create' %></div>
+    <div><%= profile.name %></div>
+    <div><%= console.log(profile) %></div>
+</script>
+
 <script type="text/template" id="login-template">
     <div class="container">
         <header>
@@ -76,7 +84,7 @@
                             <input type="text" class="form-control input-lg" placeholder="Email">
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-primary btn-lg btn-block" href="#profile/bob">Meet people</button>
+                            <button class="btn btn-primary btn-lg btn-block" href="#profile">Meet people</button>
                         </div>
                     </form>
                 </div>
@@ -104,13 +112,13 @@
         return o;
     };
     $.ajaxPrefilter( function( options, originalOptions, jqXHR ) {
-        options.url = 'http://backbone-beginner.herokuapp.com' + options.url;
+        options.url = '' + options.url;
     });
     var Users = Backbone.Collection.extend({
-        url: '/users'
+        url: 'http://backbone-beginner.herokuapp.com/users'
     });
     var User = Backbone.Model.extend({
-        urlRoot: '/users'
+        urlRoot: 'http://backbone-beginner.herokuapp.com/users'
     });
 
     var LoginView = Backbone.View.extend({
@@ -178,13 +186,38 @@
             }
         }
     });
+
+    var Profile = function (name) {
+        this.name = name;
+        return this;
+    }
+
+    var ProfileView = Backbone.View.extend({
+        el: '.page',
+        render: function (options) {
+            var that = this;
+            if(options.id) {
+                var profile = new Profile( options.name);
+                var template = _.template($('#profile-template').html(), {profile: profile});
+                that.$el.html(template);
+            } else {
+                var profile = new Profile( options.name);
+                var template = _.template($('#profile-template').html(), {profile: profile});
+                that.$el.html(template);
+            }
+        }
+    });
     var userListView = new UserListView();
     var userEditView = new UserEditView();
     var loginView = new LoginView();
+    var profileView = new ProfileView();
+
     var Router = Backbone.Router.extend({
         routes: {
-            "": "showLogin",
+            "": "home",
+            "hello" : "showLogin",
             "edit/:id": "edit",
+            "profile": "showProfile",
             "new": "edit",
         }
     });
@@ -194,6 +227,11 @@
     });
     router.on('route:edit', function(id) {
         userEditView.render({id: id});
+    })
+    router.on('route:showProfile', function() {
+        console.log("HADSSADKLASDAS");
+        console.log(name);
+        profileView.render({name: "bob"});
     })
     router.on('route:home', function() {
         // render user list

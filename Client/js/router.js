@@ -9,23 +9,40 @@ define([
 
     var Router = Backbone.Router.extend({
         routes: {
-            "": "showLogin",
-            "edit": "showLogin",
+            "bla": "showLogin",
+            "hello": "showLogin",
+            "profile": "showProfile"
         }
     });
-    var router = new Router;
-    router.on('route:showLogin', function (actions) {
-        var loginView = new LoginView();
-        console.log("AHSIDAAAAAAAAAAAA");
-        loginView.render();
-    });
+    var initialize = function() {
 
-    router.on('route:showProfile', function(profileName){
-        console.log("NIGGA");
-        var profile = new ProfileModel({profileName: profileName});
-        console.log("1231231231232133");
-        var profileView = new ProfileView(profile);
-        profileView.render();
-    });
-    Backbone.history.start();
+        var loginView = new LoginView();
+        var profileView = new ProfileView();
+
+        Backbone.View.prototype.destroyView = function() {
+            this.undelegateEvents();
+            this.$el.empty();
+            delete this;
+        };
+
+        var viewCleanup = function (lastView) {
+            if(lastView) {
+                lastView.destroyView();
+            }
+        };
+        var router = new Router;
+        router.on('route:showLogin', function () {
+            console.log("Has been routed to loginView");
+            loginView.render();
+        });
+        router.on('route:showProfile', function() {
+            console.log("Has been routed to showProfile");
+            console.log(name);
+            profileView.render({name: "bob"});
+        })
+        Backbone.history.start();
+    };
+    return {
+        initialize: initialize
+    };
 });

@@ -20,5 +20,5 @@ require([
     'bootstrap',
     'app'
 ], function($, Bootstrap, App) {
-    App.initialize();
+    App();
 });
