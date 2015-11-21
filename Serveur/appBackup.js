@@ -30,26 +30,57 @@ var questions = [
    	   "answer4": "nobody"}
     ];
 
-var emails = [];
+var emails = [{id:1,
+    		   email:"sup@sup.com",
+    		   token:"suptoken"}];
 app.post('/login', function(req, res) {
 	var currentBiggestID = 0;
 	for(var i = emails.length - 1; i >= 0; i--) {
         if(emails[i].id > currentBiggestID) {
-            currentBiggestID = tasks[i].id;
+            currentBiggestID = emails[i].id;
         }
     }
     var nextID = currentBiggestID+1;
 
     var newEmail = req.body.email;
+    var jwtToken = jwt.sign(newEmail, secretKey);
+    console.log("added new email: "+ newEmail);
     emails.push({id:nextID,
     			 email:newEmail,
+    			 token:jwtToken});
+    console.log(emails);
+    res.json({token:jwtToken});
+});
+
+app.get('/nextQuestion', function(req, res) {
+    var token = req.body.token || req.headers['token'];
+    if(token){
+    	//jwt.verify(token, app.get(secretKey), function(err, decoded) {
+        if (err) {
+	        return res.status(403).send({ 
+		       success: false, 
+		       message: 'Ton token marche pas bodey.' 
+		});   
+	      } else {
+	        console.log("passed");
+	      }
+	  });
+    }else{
+    	return res.status(403).send({ 
+		       success: false, 
+		       message: 'Pas de token, pas de chocolat.' 
+		});
+    }
+
+    /*var newEmail = req.body.email;
+    emails.push({email:newEmail,
     			 token:jwtToken});
     var jwtToken = jwt.sign(newEmail, secretKey);
     console.log("added new email: "+ newEmail);
     emails.push({email:newEmail,
     			 token:jwtToken});
     console.log(emails);
-    res.json({token:jwtToken});
+    res.json({token:jwtToken});*/
 });
 
 var server = app.listen(8081, function () {
