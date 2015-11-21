@@ -2,8 +2,10 @@
 
 html,body{height:100%;
     background-image:url("../img/Background.jpg");
+    background-attachment: fixed;
     font-family: 'simply_rounded_bold';
     color: white;
+
 }
 
 .vertical-center {
@@ -128,3 +130,4 @@ input:-ms-input-placeholder {
 color: white !important;  
 text-align: center;
 }
+
