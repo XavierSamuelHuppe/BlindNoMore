@@ -16,8 +16,13 @@ $(function () {
     };
 
     var Profile = Backbone.Model.extend({
-        urlRoot: 'http://localhost:8082/'
+        urlRoot: 'http://localhost:8083/'
     });
+
+    var Affinite = Backbone.Model.extend({
+        url: 'http://localhost:8083/:username/:type'
+    });
+
 
     var LoginView = Backbone.View.extend({
         el: '.page',
@@ -28,8 +33,8 @@ $(function () {
             that.$el.html(template);
 
             $('#connexion-button').click(function () {
-                var bla = $('#connexion-input').val();
-                $("#connexion-button").attr("href", "#/profile/"+bla);
+                var name = $('#connexion-input').val();
+                $("#connexion-button").attr("href", "#/profile/"+name);
             });
         }
     });
@@ -39,11 +44,9 @@ $(function () {
         render: function (options) {
             var that = this;
             if(options.name) {
-                console.log(" Success options.id");
                 that.profile = new Profile({id: options.name});
                 that.profile.fetch({
                     success: function (profile) {
-                        console.log(profile);
                         var template = _.template($('#profile-template').html(), {profile: profile.attributes});
                         that.$el.html(template);
                         $('.question-tooltip').tooltip({
@@ -54,17 +57,63 @@ $(function () {
                         $('.myBtn').click(function () {
                             $('.question-tooltip').tooltip('open');
                         });
+
+                        $("#chercher-gens").attr("href", "#/optimal/"+options.name);
                     }
                 })
             }
         }
     });
+
+    var OptimalView = Backbone.View.extend({
+        el: '.page',
+        render: function (options) {
+            var that = this;
+            if(options.name) {
+                that.affinite = new Affinite();
+                that.affinite.url = that.affinite.url.replace(":username", options.name);
+                that.affinite.url = that.affinite.url.replace(":type", "bests");
+                that.affinite.fetch({
+                    success: function (affinite) {
+                        console.log(affinite);
+                        var template = _.template($('#meet-template').html(), {affinites: affinite.attributes});
+                        that.$el.html(template);
+                        $("#different-button").attr("href", "#/different/"+options.name);
+                    }
+                })
+            }
+        }
+    });
+
+    var DifferentView = Backbone.View.extend({
+        el: '.page',
+        render: function (options) {
+            var that = this;
+            if(options.name) {
+                that.affinite = new Affinite();
+                that.affinite.url = that.affinite.url.replace(":username", options.name);
+                that.affinite.url = that.affinite.url.replace(":type", "opposites");
+                that.affinite.fetch({
+                    success: function (affinite) {
+                        console.log(affinite);
+                        var template = _.template($('#meet-template').html(), {affinites: affinite.attributes});
+                        that.$el.html(template);
+                        $("#optimal-button").attr("href", "#/optimal/"+options.name);
+                    }
+                })
+            }
+        }
+    });
+    var differentView = new DifferentView();
     var loginView = new LoginView();
     var profileView = new ProfileView();
+    var optimalView = new OptimalView();
 
     var Router = Backbone.Router.extend({
         routes: {
             "": "showLogin",
+            "optimal/:name": "showOptimal",
+            "different/:name": "showDifferent",
             "profile/:name": "showProfile",
         }
     });
@@ -75,8 +124,15 @@ $(function () {
     });
     router.on('route:showProfile', function(name) {
         console.log("Has been routed to showProfile");
-        console.log(name);
         profileView.render({name: name});
+    })
+    router.on('route:showOptimal', function(name) {
+        console.log("Has been routed to optimal");
+        optimalView.render({name: name});
+    })
+    router.on('route:showDifferent', function(name) {
+        console.log("Has been routed to different");
+        differentView.render({name: name});
     })
     Backbone.history.start();
 
