@@ -83,7 +83,7 @@
                 <a class="btn btn-custom btn-lg btn-block" id="optimal-button">Optimal</a>
             </div>
             <div class="col-xs-4 col-sm-4 form-group">
-                <a id="contacts-button"><img src="img/Contacts_Cropped.png" alt="" class="profil-img profil-contact img-thumbnail img-circle img-responsive"></a>
+                <a id="contacts-button"><img src="img/Contacts_Cropped.png" alt="" id="contacts-button2" class="profil-img profil-contact img-thumbnail img-circle img-responsive"></a>
             </div>
             <div class="col-xs-4 col-sm-4 form-group super-bouton">
                 <a class="btn btn-custom btn-lg btn-block" id="different-button">Différent</a>
@@ -101,8 +101,7 @@
                     <div class="col-lg-6 col-md-3 col-xs-6 col-sm-6">
                         <h4><%= affinite.matchingUser.prenom %></h4>
                         <h3><%= affinite.matchingUser.nom %></h3>
-                        <h3 class="text-center">Affinités : </h3>
-                        <h2 class="text-right"><%= affinite.matchingQuestions %></h2>
+                        <h3 class="text-center">Affinités : <%= affinite.matchingQuestions %></h3>
                     </div>
                 </div>
             </div></a>

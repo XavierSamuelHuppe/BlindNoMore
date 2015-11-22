@@ -110,7 +110,7 @@ a:focus, a:hover {
   border: none;
 }
 .well {
-  background-color:  rgba(235, 106, 92, 0.5);;
+  background-color:  rgba(235, 106, 92, 0.5);
   border-radius: 45px;
   border:none;
 }
@@ -172,9 +172,19 @@ text-align: center;
     background-color: white;
 }
 
+.look-active2{
+    background-color:  rgba(235, 106, 92, 0.5);
+}
+
+.look-active{
+    color: #eb6759;
+    text-decoration: none;
+    background-color: white;
+}
+
 .carte {
     margin-bottom: 10%;
-    margin-top: 15px;
+    margin-top: 57px;
 
 }
 
