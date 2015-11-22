@@ -147,8 +147,9 @@
                     </div>
 
                     <h4>Commentaires:</h4>
-                    <p>1. voici un commentaire quand meme asser long, il s'agit de voir ce dont il est capable</p>
-                    <p>2. voici un commentaire quand meme asser long, il s'agit de voir ce dont il est capable</p>
+                    <% _.each(selected.notes, function(note, index) { %>
+                    <p><%= index+1 %> <%= note %></p>
+                    <% }); %>
 
                     <button class="btn btn-custom btn-lg btn-block">Ajouter comme ami</button>
                 </div>

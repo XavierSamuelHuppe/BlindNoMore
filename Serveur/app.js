@@ -236,8 +236,6 @@ var unFriend = function(user,friendToUnFriend){
     contacts[user.username][friendToUnFriend.username] = false;
 }
 
-
-
 var addNotes = function(username, matchedUsername, note){
   if(!notes[username])
     notes[username] = {};
@@ -245,7 +243,10 @@ var addNotes = function(username, matchedUsername, note){
     notes[username][matchedUsername] = [];
   notes[username][matchedUsername].push(note);
 }
-
+addNotes("bob","boris","thinks is shirt is funny..");
+addNotes("bob","boris","it's not");
+addNotes("boris","bob","that guy loves my shirt");
+addNotes("boris","bob","I swear");
 var constructUserInfos = function(loggedUser){
   retour = {
     username: loggedUser.username,
