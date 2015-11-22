@@ -358,7 +358,13 @@ var constructMatchingInfos = function(loggedUser, matchedUser){
     contacts[loggedUser.username] = [];
   if(!contacts[loggedUser.username][matchedUser.username])
     contacts[loggedUser.username][matchedUser.username] = false;
-
+    var question1Match = (questions[0].answers[matchedUser.answer1-1] == questions[0].answers[loggedUser.answer1-1]);
+    var question2Match =(questions[1].answers[matchedUser.answer2-1] == questions[1].answers[loggedUser.answer2-1]);
+    var question3Match =(questions[2].answers[matchedUser.answer3-1] == questions[2].answers[loggedUser.answer3-1]);
+    var question4Match =(questions[3].answers[matchedUser.answer4-1] == questions[3].answers[loggedUser.answer4-1]);
+    var question5Match =(questions[4].answers[matchedUser.answer5-1] == questions[4].answers[loggedUser.answer5-1]);
+    var question6Match =(questions[5].answers[matchedUser.answer6-1] == questions[5].answers[loggedUser.answer6-1]);
+    var question7Match = (questions[6].answers[matchedUser.answer7-1] == questions[6].answers[loggedUser.answer7-1]);
   retour = {
     username: matchedUser.username,
     picture: matchedUser.picture,
@@ -371,26 +377,25 @@ var constructMatchingInfos = function(loggedUser, matchedUser){
     question5: questions[4].question,
     question6: questions[5].question,
     question7: questions[6].question,
-    answer1MatchedUser: questions[0].answers[matchedUser.answer1-1],
-    answer2MatchedUser: questions[1].answers[matchedUser.answer2-1],
-    answer3MatchedUser: questions[2].answers[matchedUser.answer3-1],
-    answer4MatchedUser: questions[3].answers[matchedUser.answer4-1],
-    answer5MatchedUser: questions[4].answers[matchedUser.answer5-1],
-    answer6MatchedUser: questions[5].answers[matchedUser.answer6-1],
-    answer7MatchedUser: questions[6].answers[matchedUser.answer7-1],
-    anwser1loggedUser: questions[0].answers[loggedUser.answer1-1],
-    anwser2loggedUser: questions[1].answers[loggedUser.answer2-1],
-    anwser3loggedUser: questions[2].answers[loggedUser.answer3-1],
-    anwser4loggedUser: questions[3].answers[loggedUser.answer4-1],
-    anwser5loggedUser: questions[4].answers[loggedUser.answer5-1],
-    anwser6loggedUser: questions[5].answers[loggedUser.answer6-1],
-    anwser7loggedUser: questions[6].answers[loggedUser.answer7-1],
+      answer1MatchedUser: questions[0].answers[matchedUser.answer1-1],
+      answer2MatchedUser: questions[1].answers[matchedUser.answer2-1],
+      answer3MatchedUser: questions[2].answers[matchedUser.answer3-1],
+      answer4MatchedUser: questions[3].answers[matchedUser.answer4-1],
+      answer5MatchedUser: questions[4].answers[matchedUser.answer5-1],
+      answer6MatchedUser: questions[5].answers[matchedUser.answer6-1],
+      answer7MatchedUser: questions[6].answers[matchedUser.answer7-1],
+      match1 :question1Match,
+      match2 :question2Match,
+      match3 :question3Match,
+      match4 :question4Match,
+      match5 :question5Match,
+      match6 :question6Match,
+      match7 :question7Match,
     notes: notes[loggedUser.username][matchedUser.username],
-    friendship: contacts[loggedUser.username][matchedUser.username]
+    friendship: contacts[loggedUser.username][matchedUser.username],
   }
   return retour;
 }
-
 var server = app.listen(8083, function () {
 	var host = "127.0.0.1";
 	var port = server.address().port;

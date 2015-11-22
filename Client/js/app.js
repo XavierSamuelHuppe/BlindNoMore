@@ -23,7 +23,6 @@ $(function () {
         url: 'http://localhost:8083/:username/:type'
     });
 
-
     var LoginView = Backbone.View.extend({
         el: '.page',
 
@@ -68,20 +67,17 @@ $(function () {
     var OptimalView = Backbone.View.extend({
         el: '.page',
         render: function (options) {
-            var that = this;
-            if(options.name) {
-                that.affinite = new Affinite();
-                that.affinite.url = that.affinite.url.replace(":username", options.name);
-                that.affinite.url = that.affinite.url.replace(":type", "bests");
-                that.affinite.fetch({
-                    success: function (affinite) {
-                        console.log(affinite);
-                        var template = _.template($('#meet-template').html(), {affinites: affinite.attributes});
-                        that.$el.html(template);
-                        $("#different-button").attr("href", "#/different/"+options.name);
-                    }
-                })
-            }
+        var that = this;
+            that.affinite = new Affinite();
+            that.affinite.url = that.affinite.url.replace(":username", options.name);
+            that.affinite.url = that.affinite.url.replace(":type", "bests");
+            that.affinite.fetch({
+                success: function (affinite) {
+                    var template = _.template($('#meet-template').html(), {affinites: affinite.attributes, name: options.name });
+                    that.$el.html(template);
+                    $("#different-button").attr("href", "#/different/"+options.name);
+                }
+            })
         }
     });
 
@@ -89,21 +85,44 @@ $(function () {
         el: '.page',
         render: function (options) {
             var that = this;
-            if(options.name) {
-                that.affinite = new Affinite();
-                that.affinite.url = that.affinite.url.replace(":username", options.name);
-                that.affinite.url = that.affinite.url.replace(":type", "opposites");
-                that.affinite.fetch({
-                    success: function (affinite) {
-                        console.log(affinite);
-                        var template = _.template($('#meet-template').html(), {affinites: affinite.attributes});
-                        that.$el.html(template);
-                        $("#optimal-button").attr("href", "#/optimal/"+options.name);
-                    }
-                })
-            }
+            that.affinite = new Affinite();
+            that.affinite.url = that.affinite.url.replace(":username", options.name);
+            that.affinite.url = that.affinite.url.replace(":type", "opposites");
+            that.affinite.fetch({
+                success: function (affinite) {
+                    var template = _.template($('#meet-template').html(), {affinites: affinite.attributes});
+                    that.$el.html(template);
+                    $("#optimal-button").attr("href", "#/optimal/"+options.name);
+                }
+            })
         }
     });
+
+    var SelectedView = Backbone.View.extend({
+        el: '.page',
+        render: function (options) {
+        var that = this;
+            that.selected = new Affinite();
+            that.selected.url = that.selected.url.replace(":username", options.name1);
+            that.selected.url = that.selected.url.replace(":type", options.name2);
+            that.selected.fetch({
+                success: function (selected) {
+                    console.log(selected);
+                    var template = _.template($('#selected-template').html(), {selected: selected.attributes});
+                    that.$el.html(template);
+                    $('.question-tooltip').tooltip({
+                        //use 'of' to link the tooltip to your specified input
+                        position: { of: '#myInput', my: 'left center', at: 'left center' }
+                    });
+                    $('.myBtn').click(function () {
+                        $('.question-tooltip').tooltip('open');
+                    });
+                }
+            })
+        }
+    });
+
+    var selectedView = new SelectedView();
     var differentView = new DifferentView();
     var loginView = new LoginView();
     var profileView = new ProfileView();
@@ -115,6 +134,7 @@ $(function () {
             "optimal/:name": "showOptimal",
             "different/:name": "showDifferent",
             "profile/:name": "showProfile",
+            "match/:name1/:name2": "showSelected",
         }
     });
     var router = new Router;
@@ -133,6 +153,10 @@ $(function () {
     router.on('route:showDifferent', function(name) {
         console.log("Has been routed to different");
         differentView.render({name: name});
+    })
+    router.on('route:showSelected', function(name1,name2) {
+        console.log("Has been routed to selected");
+        selectedView.render({name1: name1, name2:name2});
     })
     Backbone.history.start();
 
