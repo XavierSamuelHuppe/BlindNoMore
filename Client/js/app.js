@@ -14,7 +14,7 @@ $(function () {
         });
         return o;
     };
-    var correctUrl = "https://roover-server.herokuapp.com/";
+    var correctUrl = "http://localhost:5000/";
 
     var Profile = Backbone.Model.extend({
         urlRoot: correctUrl
@@ -125,6 +125,16 @@ $(function () {
                     $('.myBtn').click(function () {
                         $('.question-tooltip').tooltip('open');
                     });
+                    $('#ajout-ami').click(function () {
+                        if ($('#ajout-ami').text() === "Ajouter comme ami"){
+                            $.post( that.selected.url+"/add" )
+                            $('#ajout-ami').text("Retirer comme ami");
+                        }
+                        else {
+                            $.post( that.selected.url+"/unfriend" )
+                            $('#ajout-ami').text("Ajouter comme ami");
+                        }
+                  });
                 }
             })
         }
