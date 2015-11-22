@@ -137,6 +137,18 @@ app.get('/:username/opposites', function(req, res) {
     res.json(retreiveOpposites(foundUser));
   }
 });
+app.get('/:username/contacts', function(req, res) {
+  var username = req.params.username;
+  var foundUser = userFromUsers(username);
+  if(!foundUser){
+    return res.status(403).send({ 
+           success: false, 
+           message: 'Aucun utilisateur à ce nom.' });
+  }else{
+    console.log("Resquest to: " + username + "/contacts");
+    res.json(retreiveFriends(foundUser));
+  }
+});
 
 app.get('/:username/:matchedUsername', function(req, res) {
   var username = req.params.username;
@@ -224,11 +236,7 @@ var unFriend = function(user,friendToUnFriend){
     contacts[user.username][friendToUnFriend.username] = false;
 }
 
-/*var userHasUserAsContact = function(user,user2){
-  if(!contacts[user.username])
-    contacts[user.username] = [];
-  if()
-}*/
+
 
 var addNotes = function(username, matchedUsername, note){
   if(!notes[username])
@@ -283,6 +291,38 @@ var retreiveMatches = function(user){
               matchingQuestionCount++;
             retour.push({matchingQuestions:matchingQuestionCount,
                          matchingUser:users[i]});
+        }
+    }
+    return retour;
+}
+
+var retreiveFriends = function(user){
+  var retour = [];
+  for (var i = 0; i < users.length; i++) {
+        if (users[i].username != user.username) {
+            if(!contacts[user.username])
+              contacts[user.username] = [];
+            if(!contacts[user.username][users[i].username])
+              contacts[user.username][users[i].username] = false;
+            if(contacts[user.username][users[i].username]){
+              var matchingQuestionCount = 0;
+              if(users[i].answer1 === user.answer1)
+                matchingQuestionCount++;
+              if(users[i].answer2 === user.answer2)
+                matchingQuestionCount++;
+              if(users[i].answer3 === user.answer3)
+                matchingQuestionCount++;
+              if(users[i].answer4 === user.answer4)
+                matchingQuestionCount++;
+              if(users[i].answer5 === user.answer5)
+                matchingQuestionCount++;
+              if(users[i].answer6 === user.answer6)
+                matchingQuestionCount++;
+              if(users[i].answer7 === user.answer7)
+                matchingQuestionCount++;
+              retour.push({matchingQuestions:matchingQuestionCount,
+                           matchingUser:users[i]});
+            }
         }
     }
     return retour;
