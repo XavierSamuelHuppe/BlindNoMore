@@ -65,35 +65,20 @@ $(function () {
         }
     });
 
-    var OptimalView = Backbone.View.extend({
+    var MeetView = Backbone.View.extend({
         el: '.page',
         render: function (options) {
         var that = this;
             that.affinite = new Affinite();
             that.affinite.url = that.affinite.url.replace(":username", options.name);
-            that.affinite.url = that.affinite.url.replace(":type", "bests");
+            that.affinite.url = that.affinite.url.replace(":type", options.type);
             that.affinite.fetch({
                 success: function (affinite) {
                     var template = _.template($('#meet-template').html(), {affinites: affinite.attributes, name: options.name });
                     that.$el.html(template);
-                    $("#different-button").attr("href", "#/different/"+options.name);
-                }
-            })
-        }
-    });
-
-    var DifferentView = Backbone.View.extend({
-        el: '.page',
-        render: function (options) {
-            var that = this;
-            that.affinite = new Affinite();
-            that.affinite.url = that.affinite.url.replace(":username", options.name);
-            that.affinite.url = that.affinite.url.replace(":type", "opposites");
-            that.affinite.fetch({
-                success: function (affinite) {
-                    var template = _.template($('#meet-template').html(), {affinites: affinite.attributes, name: options.name});
-                    that.$el.html(template);
                     $("#optimal-button").attr("href", "#/optimal/"+options.name);
+                    $("#different-button").attr("href", "#/different/"+options.name);
+                    $("#contacts-button").attr("href", "#/contacts/"+options.name);
                 }
             })
         }
@@ -108,7 +93,6 @@ $(function () {
             that.selected.url = that.selected.url.replace(":type", options.name2);
             that.selected.fetch({
                 success: function (selected) {
-                    console.log(selected);
                     var template = _.template($('#selected-template').html(), {selected: selected.attributes});
                     that.$el.html(template);
                     $('.question-tooltip').tooltip({
@@ -156,18 +140,18 @@ $(function () {
         }
     });
     var selectedView = new SelectedView();
-    var differentView = new DifferentView();
+    var meetView = new MeetView();
     var loginView = new LoginView();
     var profileView = new ProfileView();
-    var optimalView = new OptimalView();
 
     var Router = Backbone.Router.extend({
         routes: {
             "": "showLogin",
             "optimal/:name": "showOptimal",
             "different/:name": "showDifferent",
+            "contacts/:name": "showContacts",
             "profile/:name": "showProfile",
-            "match/:name1/:name2": "showSelected",
+            "match/:name1/:name2": "showSelected"
         }
     });
     var router = new Router;
@@ -181,11 +165,15 @@ $(function () {
     })
     router.on('route:showOptimal', function(name) {
         console.log("Has been routed to optimal");
-        optimalView.render({name: name});
+        meetView.render({name: name, type:"bests"});
     })
     router.on('route:showDifferent', function(name) {
         console.log("Has been routed to different");
-        differentView.render({name: name});
+        meetView.render({name: name, type:"opposites"});
+    })
+    router.on('route:showContacts', function(name) {
+        console.log("Has been routed to contact");
+        meetView.render({name: name, type:"contacts"});
     })
     router.on('route:showSelected', function(name1,name2) {
         console.log("Has been routed to selected");
