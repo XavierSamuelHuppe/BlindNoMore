@@ -77,6 +77,15 @@ $(function () {
                 success: function (affinite) {
                     var template = _.template($('#meet-template').html(), {affinites: affinite.attributes, name: options.name });
                     that.$el.html(template);
+                    if (options.type==="bests"){
+                        $("#optimal-button").addClass('look-active');
+                    }
+                    if (options.type==="opposites"){
+                        $("#different-button").addClass('look-active');
+                    }
+                    if (options.type==="contacts"){
+                        $("#contacts-button2").addClass('look-active2');
+                    }
                     $("#optimal-button").attr("href", "#/optimal/"+options.name);
                     $("#different-button").attr("href", "#/different/"+options.name);
                     $("#contacts-button").attr("href", "#/contacts/"+options.name);
