@@ -96,7 +96,7 @@ var users = [
           answer6:2,
           answer7:3}
     ];
-
+var notes = {};
 
 app.get('/:username', function(req, res) {
 	var username = req.params.username;
@@ -139,6 +139,37 @@ app.get('/:username/:matchedUsername', function(req, res) {
     res.json(constructMatchingInfos(foundUser, matchedFoundUser));
   }
 });
+
+app.post('/:username/:matchedUsername', function(req, res){
+  var username = req.params.username;
+  var foundUser = userFromUsers(username);
+  var matchedUsername = req.params.matchedUsername;
+  var matchedFoundUser = userFromUsers(matchedUsername);
+  if(!foundUser || !matchedFoundUser){
+    return res.status(403).send({ 
+           success: false, 
+           message: 'Aucun utilisateur à ce nom.' });
+  }else{
+    var nouvelleNote = req.body.text;
+    if(nouvelleNote){
+        console.log("ajout d'une note: " + username + "/" + matchedUsername);
+        addNotes(username,matchedUsername,nouvelleNote);
+    }else{
+        return res.status(403).send({ 
+         success: false, 
+         message: 'Aucune note trouvée, utilise body.text!' });
+    }
+  }
+});
+
+var addNotes = function(username, matchedUsername, note){
+  if(!notes[username])
+    notes[username] = {};
+  if(!notes[username][matchedUsername])
+    notes[username][matchedUsername] = [];
+  notes[username][matchedUsername].push(note);
+  console.log(notes);
+}
 
 var constructUserInfos = function(loggedUser){
   retour = {
@@ -200,6 +231,10 @@ var userFromUsers = function(usernamee){
     return null;
 }
 var constructMatchingInfos = function(loggedUser, matchedUser){
+  if(!notes[loggedUser.username])
+    notes[loggedUser.username] = {};
+  if(!notes[loggedUser.username][matchedUser.username])
+    notes[loggedUser.username][matchedUser.username] = [];
   retour = {
     username: matchedUser.username,
     picture: matchedUser.picture,
@@ -225,12 +260,13 @@ var constructMatchingInfos = function(loggedUser, matchedUser){
     anwser4loggedUser: questions[3].answers[loggedUser.answer4-1],
     anwser5loggedUser: questions[4].answers[loggedUser.answer5-1],
     anwser6loggedUser: questions[5].answers[loggedUser.answer6-1],
-    anwser7loggedUser: questions[6].answers[loggedUser.answer7-1]
+    anwser7loggedUser: questions[6].answers[loggedUser.answer7-1],
+    notes: notes[loggedUser.username][matchedUser.username]
   }
   return retour;
 }
 
-var server = app.listen(8082, function () {
+var server = app.listen(8083, function () {
 	var host = "127.0.0.1";
 	var port = server.address().port;
 	console.log("server started");
