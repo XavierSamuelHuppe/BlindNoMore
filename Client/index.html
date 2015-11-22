@@ -91,8 +91,8 @@
         </div>
         <% _.each(affinites, function(affinite) { %>
         <div class="carte col-lg-offset-2">
-            <div class="row">
-                <a class="btn" href="#/match/<%= name %>/<%= affinite.matchingUser.username %>"><img src="img/Fond_CarteAffaire.png" alt="" class="behind img-responsive"></a>
+            <a href="#/match/<%= name %>/<%= affinite.matchingUser.username %>"><div class="row">
+                <img src="img/Fond_CarteAffaire.png" alt="" class="behind img-responsive">
                 <div class="test">
                     <div class="col-lg-3  col-md-3 col-xs-6 col-sm-6">
                         <img src="img/robot.png" alt="" class="profil-img img-thumbnail img-circle ">
@@ -105,7 +105,7 @@
                         <h2 class="text-right"><%= affinite.matchingQuestions %></h2>
                     </div>
                 </div>
-            </div>
+            </div></a>
         </div>
         <% }); %>
     </div>

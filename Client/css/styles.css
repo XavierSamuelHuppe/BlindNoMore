@@ -15,8 +15,12 @@ html,body{height:100%;
 .question-tooltip {
     color : #fff;
 }
+a {
+    color : white;
+}
 a:focus, a:hover {
     text-decoration: none;
+    color : white;
 }
 
 #comment {
