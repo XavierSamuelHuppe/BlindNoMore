@@ -397,8 +397,9 @@ var constructMatchingInfos = function(loggedUser, matchedUser){
   }
   return retour;
 }
-var server = app.listen(8083, function () {
-	var host = "127.0.0.1";
-	var port = server.address().port;
-	console.log("server started");
+
+app.set('port', (process.env.PORT || 5000));
+	
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });
