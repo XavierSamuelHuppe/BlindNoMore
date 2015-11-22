@@ -61,7 +61,7 @@ var users = [
 ,
 {username:"sbilodeau",picture:"bilodeau Stephanie.jpg",prenom:"Stephanie",nom:"Bilodeau",answer1:1,answer2:1,answer3:2,answer4:4,answer5:3,answer6:1,answer7:3}
 ,
-{username:"Obrassard",picture:"johndoe.jpg",prenom:"Olivier",nom:"Brassard",answer1:3,answer2:2,answer3:1,answer4:3,answer5:2,answer6:1,answer7:4}
+{username:"obrassard",picture:"johndoe.jpg",prenom:"Olivier",nom:"Brassard",answer1:3,answer2:2,answer3:1,answer4:3,answer5:2,answer6:1,answer7:4}
 ,
 {username:"gpoulin",picture:"johndoe.jpg",prenom:"gabriel",nom:"poulin",answer1:1,answer2:3,answer3:3,answer4:4,answer5:3,answer6:1,answer7:4}
 ,
