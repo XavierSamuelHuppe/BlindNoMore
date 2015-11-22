@@ -71,7 +71,7 @@ html,body{height:100%;
 
 .btn-custom {
     color: #fff;
-    background-color: #c0392b;
+    background-color: transparent;
     border-color: #c0392b;
     border-radius: 100px;
     border: white;
@@ -92,11 +92,12 @@ html,body{height:100%;
 
 .button-section {
   margin-top: 5%;
+  display: flex;
 
 }
 .background-img {
     position: absolute;
-    
+
 }
 .center-block {
     display: block;
@@ -115,19 +116,49 @@ input::-webkit-input-placeholder {
 color: white !important;
 text-align: center;
 }
- 
+
 input:-moz-placeholder { /* Firefox 18- */
-color: white !important; 
-text-align: center; 
-}
- 
-input::-moz-placeholder {  /* Firefox 19+ */
-color: white !important;  
-text-align: center;
-}
- 
-input:-ms-input-placeholder {  
-color: white !important;  
+color: white !important;
 text-align: center;
 }
 
+input::-moz-placeholder {  /* Firefox 19+ */
+color: white !important;
+text-align: center;
+}
+
+input:-ms-input-placeholder {
+color: white !important;
+text-align: center;
+}
+
+.btn-group-lg>.btn, .btn-lg {
+    padding: 5px 1px;
+    font-size: 15px;
+    line-height: 1.3333333;
+    border-radius: 60px;
+}
+
+.btn.focus, .btn:focus, .btn:hover {
+    color: #eb6759;
+    text-decoration: none;
+    background-color: white;
+}
+
+.carte {
+    margin-bottom: 10%;
+    margin-top: 15px;
+
+}
+
+.behind {
+  position: absolute;
+}
+
+.test {
+      margin-top: 13px;
+}
+
+h2.text-right {
+    margin-right: 30px;
+}
