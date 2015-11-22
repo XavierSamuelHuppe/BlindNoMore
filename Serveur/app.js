@@ -58,32 +58,32 @@ var users = [
           answer1:1,
           answer2:2,
           answer3:3,
-          answer4:4,
+          answer4:1,
           answer5:1,
-          answer6:2,
-          answer7:3}, 
+          answer6:1,
+          answer7:1}, 
         {username:"will",
           picture:"",
           prenom:"william",
           nom:"lauzé",
-          answer1:1,
+          answer1:2,
           answer2:2,
           answer3:3,
           answer4:4,
           answer5:1,
-          answer6:2,
-          answer7:3},
+          answer6:1,
+          answer7:1},
         {username:"xav",
           picture:"",
           prenom:"xavier",
           nom:"huppé",
           answer1:1,
-          answer2:2,
-          answer3:3,
-          answer4:4,
-          answer5:1,
-          answer6:2,
-          answer7:3},
+          answer2:1,
+          answer3:1,
+          answer4:1,
+          answer5:2,
+          answer6:1,
+          answer7:1},
         {username:"boris",
           picture:"",
           prenom:"boris",
@@ -96,7 +96,8 @@ var users = [
           answer6:2,
           answer7:3}
     ];
-
+var notes = {};
+var contacts = {};
 
 app.get('/:username', function(req, res) {
 	var username = req.params.username;
@@ -124,6 +125,18 @@ app.get('/:username/bests', function(req, res) {
     res.json(retreiveBests(foundUser));
   }
 });
+app.get('/:username/opposites', function(req, res) {
+  var username = req.params.username;
+  var foundUser = userFromUsers(username);
+  if(!foundUser){
+    return res.status(403).send({ 
+           success: false, 
+           message: 'Aucun utilisateur à ce nom.' });
+  }else{
+    console.log("Resquest to: " + username + "/opposites");
+    res.json(retreiveOpposites(foundUser));
+  }
+});
 
 app.get('/:username/:matchedUsername', function(req, res) {
   var username = req.params.username;
@@ -139,6 +152,91 @@ app.get('/:username/:matchedUsername', function(req, res) {
     res.json(constructMatchingInfos(foundUser, matchedFoundUser));
   }
 });
+
+app.post('/:username/:matchedUsername', function(req, res){
+  var username = req.params.username;
+  var foundUser = userFromUsers(username);
+  var matchedUsername = req.params.matchedUsername;
+  var matchedFoundUser = userFromUsers(matchedUsername);
+  if(!foundUser || !matchedFoundUser){
+    return res.status(403).send({ 
+           success: false, 
+           message: 'Aucun utilisateur à ce nom.' });
+  }else{
+    var nouvelleNote = req.body.text;
+    if(nouvelleNote){
+        console.log("ajout d'une note: " + username + "/" + matchedUsername);
+        addNotes(username,matchedUsername,nouvelleNote);
+        res.json(nouvelleNote);
+    }else{
+        return res.status(403).send({ 
+         success: false, 
+         message: 'Aucune note trouvée, utilise body.text!' });
+    }
+  }
+});
+
+app.post('/:username/:matchedUsername/add', function(req, res){
+  var username = req.params.username;
+  var foundUser = userFromUsers(username);
+  var matchedUsername = req.params.matchedUsername;
+  var matchedFoundUser = userFromUsers(matchedUsername);
+  if(!foundUser || !matchedFoundUser){
+    return res.status(403).send({ 
+           success: false, 
+           message: 'Aucun utilisateur à ce nom.' });
+  }else{
+    addFriend(foundUser,matchedFoundUser);
+    res.status(200).send();
+  }
+});
+
+app.post('/:username/:matchedUsername/unfriend', function(req, res){
+  var username = req.params.username;
+  var foundUser = userFromUsers(username);
+  var matchedUsername = req.params.matchedUsername;
+  var matchedFoundUser = userFromUsers(matchedUsername);
+  if(!foundUser || !matchedFoundUser){
+    return res.status(403).send({ 
+           success: false, 
+           message: 'Aucun utilisateur à ce nom.' });
+  }else{
+    unFriend(foundUser,matchedFoundUser);
+    res.status(200).send();
+  }
+});
+
+var addFriend = function(user,newFriendToAddUser){
+  if(!contacts[user.username])
+    contacts[user.username] = [];
+  if(!contacts[user.username][newFriendToAddUser.username]){
+    console.log(user.username + " ajoute " + newFriendToAddUser.username);
+    contacts[user.username][newFriendToAddUser.username] = true;
+  }else{
+    console.log(user.username + " avait deja " + newFriendToAddUser.username);
+  }
+}
+
+var unFriend = function(user,friendToUnFriend){
+  if(!contacts[user.username])
+    contacts[user.username] = [];
+    console.log(user.username + " delete " + friendToUnFriend.username);
+    contacts[user.username][friendToUnFriend.username] = false;
+}
+
+/*var userHasUserAsContact = function(user,user2){
+  if(!contacts[user.username])
+    contacts[user.username] = [];
+  if()
+}*/
+
+var addNotes = function(username, matchedUsername, note){
+  if(!notes[username])
+    notes[username] = {};
+  if(!notes[username][matchedUsername])
+    notes[username][matchedUsername] = [];
+  notes[username][matchedUsername].push(note);
+}
 
 var constructUserInfos = function(loggedUser){
   retour = {
@@ -164,7 +262,7 @@ var constructUserInfos = function(loggedUser){
   return retour;
 }
 
-var retreiveBests = function(user){
+var retreiveMatches = function(user){
   var retour = [];
   for (var i = 0; i < users.length; i++) {
         if (users[i].username != user.username) {
@@ -187,9 +285,20 @@ var retreiveBests = function(user){
                          matchingUser:users[i]});
         }
     }
-    retour.sort(function(a, b){return b.count-a.count});
     return retour;
 }
+
+var retreiveBests = function(user){
+  var retour = retreiveMatches(user);
+    retour.sort(function(a, b){return b.matchingQuestions-a.matchingQuestions});
+    return retour;
+}
+var retreiveOpposites = function(user){
+  var retour = retreiveMatches(user);
+    retour.sort(function(a, b){return a.matchingQuestions-b.matchingQuestions});
+    return retour;
+}
+
 
 var userFromUsers = function(usernamee){
   for (var i = 0; i < users.length; i++) {
@@ -200,6 +309,16 @@ var userFromUsers = function(usernamee){
     return null;
 }
 var constructMatchingInfos = function(loggedUser, matchedUser){
+  if(!notes[loggedUser.username])
+    notes[loggedUser.username] = {};
+  if(!notes[loggedUser.username][matchedUser.username])
+    notes[loggedUser.username][matchedUser.username] = [];
+
+  if(!contacts[loggedUser.username])
+    contacts[loggedUser.username] = [];
+  if(!contacts[loggedUser.username][matchedUser.username])
+    contacts[loggedUser.username][matchedUser.username] = false;
+
   retour = {
     username: matchedUser.username,
     picture: matchedUser.picture,
@@ -225,12 +344,14 @@ var constructMatchingInfos = function(loggedUser, matchedUser){
     anwser4loggedUser: questions[3].answers[loggedUser.answer4-1],
     anwser5loggedUser: questions[4].answers[loggedUser.answer5-1],
     anwser6loggedUser: questions[5].answers[loggedUser.answer6-1],
-    anwser7loggedUser: questions[6].answers[loggedUser.answer7-1]
+    anwser7loggedUser: questions[6].answers[loggedUser.answer7-1],
+    notes: notes[loggedUser.username][matchedUser.username],
+    friendship: contacts[loggedUser.username][matchedUser.username]
   }
   return retour;
 }
 
-var server = app.listen(8082, function () {
+var server = app.listen(8083, function () {
 	var host = "127.0.0.1";
 	var port = server.address().port;
 	console.log("server started");
