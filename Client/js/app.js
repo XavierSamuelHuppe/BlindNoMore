@@ -118,6 +118,11 @@ $(function () {
                     $('.myBtn').click(function () {
                         $('.question-tooltip').tooltip('open');
                     });
+
+                    $('#bouton-retour').click(function () {
+                        var MyApp = new Backbone.Router();
+                        MyApp.navigate('optimal/'+options.name1, {trigger: true});
+                    });
                     $('#enregistrer-commentaire').click(function () {
                         var data = {"text": $('#comment').val() };
                         $.ajax({
@@ -125,8 +130,16 @@ $(function () {
                             url: that.selected.url,
                             data: JSON.stringify(data),
                             contentType: 'application/json',
-                            processData: false
+                            processData: false,
+                            success: refreshUrl()
                         });
+                        function refreshUrl() {
+                            setTimeout(
+                                function()
+                                {
+                                    Backbone.history.loadUrl(Backbone.history.fragment);
+                                }, 500);
+                        }
                     });
                     $('#ajout-ami').click(function () {
                         if ($('#ajout-ami').text() === "Ajouter comme ami"){
@@ -142,7 +155,6 @@ $(function () {
             })
         }
     });
-
     var selectedView = new SelectedView();
     var differentView = new DifferentView();
     var loginView = new LoginView();
