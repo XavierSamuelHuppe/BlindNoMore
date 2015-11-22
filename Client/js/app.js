@@ -91,7 +91,7 @@ $(function () {
             that.affinite.url = that.affinite.url.replace(":type", "opposites");
             that.affinite.fetch({
                 success: function (affinite) {
-                    var template = _.template($('#meet-template').html(), {affinites: affinite.attributes});
+                    var template = _.template($('#meet-template').html(), {affinites: affinite.attributes, name: options.name});
                     that.$el.html(template);
                     $("#optimal-button").attr("href", "#/optimal/"+options.name);
                 }
@@ -100,6 +100,13 @@ $(function () {
     });
 
     var SelectedView = Backbone.View.extend({
+        events : {"submit" : "onSubmit"},
+        onSubmit : function(e) {
+            e.preventDefault();
+            this.model.save({name: this.$("#name").val()}, {
+                success : function (newModel) { /* Do something here. */ }
+            });
+        },
         el: '.page',
         render: function (options) {
         var that = this;
