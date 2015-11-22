@@ -57,13 +57,13 @@ var users = [
 ,
 {username:"sbillington",picture:"sam Billington.jpg",prenom:"Sam",nom:"Billington",answer1:3,answer2:4,answer3:2,answer4:3,answer5:4,answer6:1,answer7:4}
 ,
-{username:"jroy",picture:"Jonny Roy.jpg",prenom:"Jonny",nom:"Roy",answer1:3,answer2:4,answer3:1,answer4:2,answer5:1,answer6:2,answer7:4}
+{username:"jroy",picture:"Jonny Roy.png",prenom:"Jonny",nom:"Roy",answer1:3,answer2:4,answer3:1,answer4:2,answer5:1,answer6:2,answer7:4}
 ,
 {username:"sbilodeau",picture:"bilodeau Stephanie.jpg",prenom:"Stephanie",nom:"Bilodeau",answer1:1,answer2:1,answer3:2,answer4:4,answer5:3,answer6:1,answer7:3}
 ,
-{username:"Obrassard",picture:"",prenom:"Olivier",nom:"Brassard",answer1:3,answer2:2,answer3:1,answer4:3,answer5:2,answer6:1,answer7:4}
+{username:"Obrassard",picture:"johndoe.jpg",prenom:"Olivier",nom:"Brassard",answer1:3,answer2:2,answer3:1,answer4:3,answer5:2,answer6:1,answer7:4}
 ,
-{username:"gpoulin",picture:"",prenom:"gabriel",nom:"poulin",answer1:1,answer2:3,answer3:3,answer4:4,answer5:3,answer6:1,answer7:4}
+{username:"gpoulin",picture:"johndoe.jpg",prenom:"gabriel",nom:"poulin",answer1:1,answer2:3,answer3:3,answer4:4,answer5:3,answer6:1,answer7:4}
 ,
 {username:"jnadeauplante",picture:"Joelle Nadeau-Plante.jpg",prenom:"Joelle",nom:"Nadeau-Plante",answer1:1,answer2:1,answer3:4,answer4:2,answer5:3,answer6:2,answer7:4}
 ,
@@ -73,7 +73,7 @@ var users = [
 ,
 {username:"yboisjoly",picture:"Yan Boisjoly.jpg",prenom:"Yan",nom:"Boisjoly",answer1:2,answer2:2,answer3:1,answer4:4,answer5:2,answer6:1,answer7:3}
 ,
-{username:"slemieux",picture:"",prenom:"Sebastien",nom:"Lemieux",answer1:2,answer2:2,answer3:2,answer4:2,answer5:3,answer6:1,answer7:2}
+{username:"slemieux",picture:"johndoe.jpg",prenom:"Sebastien",nom:"Lemieux",answer1:2,answer2:2,answer3:2,answer4:2,answer5:3,answer6:1,answer7:2}
 ,
 {username:"abrillant",picture:"Alexandre Brillant.jpg",prenom:"Alexandre",nom:"Brillant",answer1:2,answer2:4,answer3:1,answer4:2,answer5:2,answer6:1,answer7:4}
 ,
@@ -89,7 +89,7 @@ var users = [
 ,
 {username:"sbouchard",picture:"Samuel Bouchard.jpg",prenom:"samuel",nom:"bouchard",answer1:1,answer2:4,answer3:3,answer4:2,answer5:3,answer6:1,answer7:3}
 ,
-{username:"mdenis",picture:"",prenom:"Marie",nom:"Denis",answer1:1,answer2:3,answer3:3,answer4:2,answer5:1,answer6:3,answer7:3}
+{username:"mdenis",picture:"johndoe.jpg",prenom:"Marie",nom:"Denis",answer1:1,answer2:3,answer3:3,answer4:2,answer5:1,answer6:3,answer7:3}
 ,
 {username:"gboakninsavard",picture:"Boaknin Savard.jpg",prenom:"gabrielle",nom:"b savard",answer1:3,answer2:4,answer3:4,answer4:3,answer5:3,answer6:3,answer7:3}
 ,
@@ -105,7 +105,7 @@ var users = [
 ,
 {username:"pygendron",picture:"Pierre-Yves Gendron.jpg",prenom:"Pierre-Yves",nom:"Gendron",answer1:3,answer2:2,answer3:1,answer4:3,answer5:2,answer6:1,answer7:4}
 ,
-{username:"xmorissethuppe",picture:"robot.jpg",prenom:"Xavier Samuel",nom:"Morisset-Huppe",answer1:2,answer2:4,answer3:1,answer4:4,answer5:1,answer6:1,answer7:4}
+{username:"xmorissethuppe",picture:"robot.png",prenom:"Xavier Samuel",nom:"Morisset-Huppe",answer1:2,answer2:4,answer3:1,answer4:4,answer5:1,answer6:1,answer7:4}
 ,
 {username:"bfortincote",picture:"boris.jpg",prenom:"Boris",nom:"Fortin Cote",answer1:2,answer2:4,answer3:1,answer4:1,answer5:1,answer6:1,answer7:3}
 ,
@@ -113,13 +113,13 @@ var users = [
 ,
 {username:"rdancauseratte",picture:"Dancause-Ratte.jpg",prenom:"Rebecca",nom:"Dancause-Ratte",answer1:3,answer2:2,answer3:1,answer4:2,answer5:4,answer6:3,answer7:4}
 ,
-{username:"ctherrien",picture:"",prenom:"Charles",nom:"Therrien",answer1:3,answer2:3,answer3:4,answer4:2,answer5:3,answer6:1,answer7:3}
+{username:"ctherrien",picture:"johndoe.jpg",prenom:"Charles",nom:"Therrien",answer1:3,answer2:3,answer3:4,answer4:2,answer5:3,answer6:1,answer7:3}
 ,
-{username:"amarinos",picture:"",prenom:"alexandre",nom:"marinos",answer1:1,answer2:3,answer3:1,answer4:1,answer5:2,answer6:3,answer7:4}
+{username:"amarinos",picture:"johndoe.jpg",prenom:"alexandre",nom:"marinos",answer1:1,answer2:3,answer3:1,answer4:1,answer5:2,answer6:3,answer7:4}
 ,
 {username:"fmorel",picture:"Frederique Morel.jpg",prenom:"Frederique",nom:"Morel",answer1:4,answer2:2,answer3:3,answer4:2,answer5:3,answer6:2,answer7:4}
 ,
-{username:"mchampagne",picture:"",prenom:"Marcel",nom:"Champagne",answer1:3,answer2:4,answer3:1,answer4:2,answer5:3,answer6:2,answer7:4}
+{username:"mchampagne",picture:"johndoe.jpg",prenom:"Marcel",nom:"Champagne",answer1:3,answer2:4,answer3:1,answer4:2,answer5:3,answer6:2,answer7:4}
 ,
 {username:"wlauze",picture:"wlauze.jpg",prenom:"William",nom:"Lauze",answer1:2,answer2:4,answer3:1,answer4:2,answer5:1,answer6:1,answer7:4}
 ,
@@ -127,9 +127,9 @@ var users = [
 ,
 {username:"jpare",picture:"J-M Pare.jpg",prenom:"Jean-Michel",nom:"Pare",answer1:3,answer2:2,answer3:2,answer4:2,answer5:3,answer6:1,answer7:2}
 ,
-{username:"carguin",picture:"",prenom:"Chantal",nom:"Arguin",answer1:3,answer2:2,answer3:1,answer4:2,answer5:2,answer6:2,answer7:3}
+{username:"carguin",picture:"johndoe.jpg",prenom:"Chantal",nom:"Arguin",answer1:3,answer2:2,answer3:1,answer4:2,answer5:2,answer6:2,answer7:3}
 ,
-{username:"jdoe",picture:"",prenom:"john",nom:"doe",answer1:2,answer2:1,answer3:4,answer4:2,answer5:3,answer6:1,answer7:4}
+{username:"jdoe",picture:"johndoe.jpg",prenom:"john",nom:"doe",answer1:2,answer2:1,answer3:4,answer4:2,answer5:3,answer6:1,answer7:4}
 
 ];
 var notes = {};
