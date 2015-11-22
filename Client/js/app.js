@@ -127,13 +127,13 @@ $(function () {
                         }
                     });
                     $('#ajout-ami').click(function () {
-                        if ($('#ajout-ami').text() === "Ajouter comme ami"){
+                        if ($('#ajout-ami').text() === "Ajouter comme contact"){
                             $.post( that.selected.url+"/add" )
-                            $('#ajout-ami').text("Retirer comme ami");
+                            $('#ajout-ami').text("Retirer comme contact");
                         }
                         else {
                             $.post( that.selected.url+"/unfriend" )
-                            $('#ajout-ami').text("Ajouter comme ami");
+                            $('#ajout-ami').text("Ajouter comme contact");
                         }
                   });
                 }

@@ -5,7 +5,12 @@ html,body{height:100%;
     background-attachment: fixed;
     font-family: 'simply_rounded_bold';
     color: white;
-
+}
+.super-bouton {
+    padding:0;
+}
+.profil-contact {
+    width:100%;
 }
 .question-tooltip {
     color : #fff;
@@ -55,6 +60,7 @@ a:focus, a:hover {
 .profil-img {
   border:none;
   margin-bottom: 2%;
+  background-color:rgba(0, 0, 0, 0);
 }
 
 .card {
@@ -152,6 +158,8 @@ text-align: center;
     font-size: 15px;
     line-height: 1.3333333;
     border-radius: 60px;
+    margin-top: 20px;
+    width: 100%;
 }
 
 .btn.focus, .btn:focus, .btn:hover {

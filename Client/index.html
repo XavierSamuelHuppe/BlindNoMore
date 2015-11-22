@@ -79,24 +79,23 @@
     <div class="container col-xs-12 col-md-8 col-lg-6 col-lg-offset-3">
 
         <div class="button-section">
-            <div class="col-xs-4 col-sm-4 form-group">
+            <div class="col-xs-4 col-sm-4 form-group super-bouton">
                 <a class="btn btn-custom btn-lg btn-block" id="optimal-button">Optimal</a>
             </div>
             <div class="col-xs-4 col-sm-4 form-group">
-                <a class="btn btn-custom btn-lg btn-block" id="different-button">Différent</a>
+                <a id="contacts-button"><img src="img/Contacts_Cropped.png" alt="" class="profil-img profil-contact img-thumbnail img-circle img-responsive"></a>
             </div>
-            <div class="col-xs-4 col-sm-4 form-group">
-                <a class="btn btn-custom btn-lg btn-block" id="contacts-button">Contacts</a>
+            <div class="col-xs-4 col-sm-4 form-group super-bouton">
+                <a class="btn btn-custom btn-lg btn-block" id="different-button">Différent</a>
             </div>
         </div>
         <% _.each(affinites, function(affinite) { %>
         <div class="carte col-lg-offset-2">
             <div class="row">
-                <img src="img/Fond_CarteAffaire.png" alt="" class="behind img-responsive">
+                <a class="btn" href="#/match/<%= name %>/<%= affinite.matchingUser.username %>"><img src="img/Fond_CarteAffaire.png" alt="" class="behind img-responsive"></a>
                 <div class="test">
                     <div class="col-lg-3  col-md-3 col-xs-6 col-sm-6">
                         <img src="img/robot.png" alt="" class="profil-img img-thumbnail img-circle ">
-                        <button class="btn btn-custom btn-lg btn-block"><a class="btn" href="#/match/<%= name %>/<%= affinite.matchingUser.username %>"id="voir-profil">Voir profil</a></button>
                     </div>
 
                     <div class="col-lg-6 col-md-3 col-xs-6 col-sm-6">
@@ -150,7 +149,7 @@
                     <% _.each(selected.notes, function(note, index) { %>
                     <p><%= index+1 %> <%= note %></p>
                     <% }); %>
-                    <button class="btn btn-custom btn-lg btn-block" id="ajout-ami"><%=selected.friendship === false ? "Ajouter comme ami" : "Retirer comme ami" %></button>
+                    <button class="btn btn-custom btn-lg btn-block" id="ajout-ami"><%=selected.friendship === false ? "Ajouter comme contact" : "Retirer comme contact" %></button>
                 </div>
             </div>
 
