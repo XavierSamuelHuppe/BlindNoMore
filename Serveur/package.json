@@ -1,11 +1,11 @@
 {
   "name": "Roover",
-  "version": "1.0,0",
+  "version": "1.0.0",
   "dependencies": {
-    "body-parser": "~1.14.1",
-    "express": "~4.13.3"
+    "body-parser": "1.14.1",
+    "express": "4.13.3"
   },
   "engines": {
-    "node": "5.0.0"
+    "node": "0.10.25"
   }
 }

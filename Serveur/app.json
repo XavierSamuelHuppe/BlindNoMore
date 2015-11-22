@@ -1,0 +1,8 @@
+{
+  "name": "Roover",
+  "description": "Roover StartUpWeekend",
+  "repository": "https://github.com/XavierSamuelHuppe/Roover.git",
+  "logo": "http://node-js-sample.herokuapp.com/node.svg",
+  "keywords": ["node", "express", "static"],
+  "image": "heroku/nodejs"
+}
