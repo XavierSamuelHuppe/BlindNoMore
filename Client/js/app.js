@@ -14,13 +14,14 @@ $(function () {
         });
         return o;
     };
+    var correctUrl = "https://roover-server.herokuapp.com/";
 
     var Profile = Backbone.Model.extend({
-        urlRoot: 'http://localhost:8083/'
+        urlRoot: correctUrl
     });
 
     var Affinite = Backbone.Model.extend({
-        url: 'http://localhost:8083/:username/:type'
+        url: correctUrl+':username/:type'
     });
 
     var LoginView = Backbone.View.extend({
