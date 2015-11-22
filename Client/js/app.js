@@ -14,7 +14,8 @@ $(function () {
         });
         return o;
     };
-    var correctUrl = "http://localhost:5000/";
+    //var correctUrl = "http://localhost:5000/";
+    var correctUrl = "http://roover-server.herokuapp.com/";
 
     var Profile = Backbone.Model.extend({
         urlRoot: correctUrl
