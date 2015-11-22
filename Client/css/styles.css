@@ -199,3 +199,7 @@ text-align: center;
 h2.text-right {
     margin-right: 30px;
 }
+
+#enregistrer-commentaire{
+    width: 108%;
+}

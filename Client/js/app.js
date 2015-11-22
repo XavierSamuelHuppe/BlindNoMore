@@ -40,6 +40,16 @@ $(function () {
         }
     });
 
+    var OopsView = Backbone.View.extend({
+        el: '.page',
+
+        render: function() {
+            var that = this;
+            var template = _.template($('#oops-template').html(), {});
+            that.$el.html(template);
+        }
+    });
+
     var ProfileView = Backbone.View.extend({
         el: '.page',
         render: function (options) {
@@ -117,6 +127,10 @@ $(function () {
                         var MyApp = new Backbone.Router();
                         MyApp.navigate('optimal/'+options.name1, {trigger: true});
                     });
+                    $('#ajout-multi').click(function () {
+                        var MyApp = new Backbone.Router();
+                        MyApp.navigate('oops', {trigger: true});
+                    });
                     $('#enregistrer-commentaire').click(function () {
                         var data = {"text": $('#comment').val() };
                         $.ajax({
@@ -149,6 +163,7 @@ $(function () {
             })
         }
     });
+    var oopsView = new OopsView();
     var selectedView = new SelectedView();
     var meetView = new MeetView();
     var loginView = new LoginView();
@@ -161,7 +176,8 @@ $(function () {
             "different/:name": "showDifferent",
             "contacts/:name": "showContacts",
             "profile/:name": "showProfile",
-            "match/:name1/:name2": "showSelected"
+            "match/:name1/:name2": "showSelected",
+            "oops": "showOops"
         }
     });
     var router = new Router;
@@ -188,6 +204,10 @@ $(function () {
     router.on('route:showSelected', function(name1,name2) {
         console.log("Has been routed to selected");
         selectedView.render({name1: name1, name2:name2});
+    })
+    router.on('route:showOops', function() {
+        console.log("Has been routed to Oops");
+        oopsView.render();
     })
     Backbone.history.start();
 
