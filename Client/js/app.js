@@ -100,13 +100,6 @@ $(function () {
     });
 
     var SelectedView = Backbone.View.extend({
-        events : {"submit" : "onSubmit"},
-        onSubmit : function(e) {
-            e.preventDefault();
-            this.model.save({name: this.$("#name").val()}, {
-                success : function (newModel) { /* Do something here. */ }
-            });
-        },
         el: '.page',
         render: function (options) {
         var that = this;
@@ -124,6 +117,16 @@ $(function () {
                     });
                     $('.myBtn').click(function () {
                         $('.question-tooltip').tooltip('open');
+                    });
+                    $('#enregistrer-commentaire').click(function () {
+                        var data = {"text": $('#comment').val() };
+                        $.ajax({
+                            type: "POST",
+                            url: that.selected.url,
+                            data: JSON.stringify(data),
+                            contentType: 'application/json',
+                            processData: false
+                        });
                     });
                     $('#ajout-ami').click(function () {
                         if ($('#ajout-ami').text() === "Ajouter comme ami"){
